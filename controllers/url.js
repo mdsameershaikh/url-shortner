@@ -2,8 +2,8 @@ const shortid = require("shortid");
 const url = require('../models/url')
 
 async function genetateShortURL( req, res){
-    const body = res.body;
-    if(!body.url){
+    const body = req.body;
+    if(body && !body.url){
         return  res.status('400').json({error: 'url is required'})
     }
     const shortID = shortid();
@@ -14,5 +14,6 @@ async function genetateShortURL( req, res){
     });
     return res.json({id: shortID}) 
 }
+
 
 module.exports = {genetateShortURL }
