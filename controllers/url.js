@@ -1,4 +1,4 @@
-const { nanoid } = require("nanoid");
+const shortid = require("shortid");
 const url = require('../models/url')
 
 async function genetateShortURL( req, res){
@@ -6,7 +6,7 @@ async function genetateShortURL( req, res){
     if(!body.url){
         return  res.status('400').json({error: 'url is required'})
     }
-    const shortID = nanoid(8);
+    const shortID = shortid();
     await url.create({
         shortID,
         redirectURL: body.url,  
@@ -15,4 +15,4 @@ async function genetateShortURL( req, res){
     return res.json({id: shortID}) 
 }
 
-module.exports = {genetateShortURL  }
+module.exports = {genetateShortURL }
